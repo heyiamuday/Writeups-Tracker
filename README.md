@@ -7,6 +7,9 @@ Use it to keep a study-focused reading workflow, track progress across browsers 
 
 ---
 
+https://github.com/user-attachments/assets/92a0b105-4b21-4dcd-9af7-51d6794b3c05
+
+
 
 ## Quick TL;DR
 
