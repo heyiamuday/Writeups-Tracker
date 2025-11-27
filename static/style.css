@@ -1,0 +1,135 @@
+:root{
+  --bg: #f7f9fc;
+  --card: #ffffff;
+  --text: #222;
+  --muted: #666;
+  --accent: #2b8aef;
+  --success: #26a65b;
+  --danger: #e74c3c;
+}
+body.dark {
+  --bg: #0e0f12;
+  --card: #111217;
+  --text: #e6eef6;
+  --muted: #9aa6b2;
+  --accent: #3ea6ff;
+  --success: #3dd27f;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:var(--bg);
+  color:var(--text);
+}
+.container{max-width:1100px;margin:18px auto;padding:18px}
+header{display:flex;flex-direction:column;gap:12px}
+header h1{margin:0;font-size:20px}
+.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.controls input[type="text"], #search{padding:8px;border:1px solid #ddd;border-radius:6px;min-width:220px}
+.controls select{padding:8px;border-radius:6px;border:1px solid #ddd}
+.controls button{padding:8px 10px;border-radius:6px;border:0;background:var(--accent);color:white;cursor:pointer}
+.controls .toggle{display:flex;align-items:center;gap:6px}
+.settings{margin-top:10px;display:flex;gap:16px;align-items:center}
+.progress-bars{display:flex;gap:18px;margin-top:14px;flex-wrap:wrap}
+.progress{background:rgba(0,0,0,0.06);border-radius:6px;height:14px;width:320px;overflow:hidden}
+.progress-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),#7ad0ff)}
+.progress-bar.weekly{background:linear-gradient(90deg,var(--success),#9effc4)}
+.progress-label{font-size:12px;color:var(--muted);margin-bottom:6px}
+.progress-text{font-size:13px;color:var(--muted);margin-top:6px}
+
+main{margin-top:18px}
+.writeup-list{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.writeup-item{
+  display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:8px;background:var(--card);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+}
+.leftmeta{width:120px;flex-shrink:0}
+.title {
+  font-weight:600;
+  margin-bottom:6px;
+}
+.meta{font-size:13px;color:var(--muted)}
+.badge{display:inline-block;padding:4px 8px;border-radius:12px;background:rgba(0,0,0,0.05);font-size:12px;margin-right:6px}
+.actions{margin-left:auto;display:flex;flex-direction:column;gap:6px}
+.btn{padding:6px 8px;border-radius:6px;border:0;cursor:pointer}
+.btn.read{background:#e6ffef;color:#006b26}
+.btn.unread{background:#fff5f5;color:#9a1d14;border:1px solid rgba(0,0,0,0.06)}
+.small{font-size:13px;padding:6px 8px}
+.bounty{font-weight:700;margin-top:6px}
+.commentBox{margin-top:8px;padding:8px;border-radius:6px;background:rgba(0,0,0,0.03);font-size:13px;color:var(--muted)}
+
+.writeup-item.read { opacity:0.9; border-left:6px solid var(--success) }
+.writeup-item.unread { border-left:6px solid transparent }
+
+.pagination-container{display:flex;align-items:center;gap:8px;margin:12px 0;flex-wrap:wrap}
+.page-btn{padding:6px 10px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);cursor:pointer;background:transparent}
+.page-btn.active{background:var(--accent);color:white;border-color:transparent}
+.range-text{font-size:13px;color:var(--muted);margin-right:8px}
+
+/* Modern GitHub-style heatmap styles */
+.heatmap-section {
+  background: var(--card);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 12px;
+  padding: 18px;
+  margin-top: 26px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+}
+.heatmap-title { display:flex;align-items:center;gap:12px;font-weight:700;font-size:18px;margin-bottom:12px }
+.heatmap-sub { font-size:12px;color:var(--muted);font-weight:500;margin-left:8px }
+
+.heatmap-container { display:block }
+.heatmap-inner { max-width:100%; }
+.month-labels { display:flex; align-items:center; height:20px; margin-left:42px; padding-right:8px; overflow:hidden; white-space:nowrap; font-size:12px; color:var(--muted) }
+
+.heatmap-body { display:flex; gap:12px; align-items:flex-start; }
+.day-labels { display:flex; flex-direction:column; gap:6px; padding-top:6px; width:42px; flex-shrink:0 }
+.day-label { font-size:11px; color:var(--muted); height:13px; display:flex; align-items:center; justify-content:flex-end; padding-right:8px; }
+
+.heatmap-scroll { overflow-x:auto; padding-bottom:6px; -webkit-overflow-scrolling:touch; }
+.weeks-grid { display:flex; gap:6px; padding:4px; align-items:flex-start }
+.week-col { display:flex; flex-direction:column; gap:6px }
+.day-cell {
+  width:14px; height:14px; border-radius:3px;
+  background:#ebedf0; border:1px solid rgba(0,0,0,0.03);
+  transition: transform .14s ease, box-shadow .14s ease;
+  cursor:pointer;
+}
+.day-cell.empty { opacity:0.25; cursor:default; transform:none; }
+.day-cell:hover { transform:scale(1.45); z-index:20; box-shadow:0 6px 18px rgba(2,6,23,0.12); }
+
+.heatmap-legend { display:flex; align-items:center; gap:10px; margin-top:10px; justify-content:flex-end }
+.legend-scale { display:flex; gap:6px; align-items:center; padding-left:8px }
+.legend-box { width:14px; height:14px; border-radius:3px; border:1px solid rgba(0,0,0,0.03); }
+
+.heatmap-tooltip {
+  position:fixed; z-index:2000; pointer-events:none;
+  background:var(--card); border:1px solid rgba(0,0,0,0.08);
+  padding:8px 10px; border-radius:8px; font-size:13px; color:var(--text);
+  box-shadow:0 6px 32px rgba(2,6,23,0.12); min-width:140px;
+}
+.heatmap-tooltip .date { font-weight:700; margin-bottom:6px; display:block }
+.heatmap-tooltip .count { color:var(--muted); font-size:13px }
+
+.modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index:3000; }
+.modal[aria-hidden="false"] { display:flex }
+.modal-panel { width:90%; max-width:900px; background:var(--card); border-radius:10px; padding:18px; box-shadow:0 30px 80px rgba(2,6,23,0.2); border:1px solid rgba(0,0,0,0.06) }
+.modal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px }
+.modal-title { font-weight:700 }
+.close-btn { width:34px; height:34px; border-radius:6px; border:0; background:transparent; cursor:pointer; font-size:16px }
+
+@media (max-width:800px) {
+  .month-labels { display:none } /* save space on small screens */
+  .day-labels { display:none }
+  .heatmap-scroll { max-width:100% }
+}
+
+
+footer{margin-top:18px;color:var(--muted);font-size:13px}
+
+@media (max-width:700px){
+  .controls{flex-direction:column;align-items:stretch}
+  .progress{width:100%}
+  .leftmeta{display:none}
+}

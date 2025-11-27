@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Writeups Tracker (local)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app" class="container">
+    <header>
+      <h1>Writeups Tracker</h1>
+      <div class="controls">
+        <input id="search" placeholder="Search title, author, tags..." />
+        <select id="tagFilter">
+          <option value="">— Filter by bug class —</option>
+        </select>
+        <select id="sortSelect">
+          <option value="date_desc">Date ▼</option>
+          <option value="date_asc">Date ▲</option>
+          <option value="title">Title</option>
+          <option value="author">Author</option>
+          <option value="bounty_desc">Bounty ▼</option>
+          <option value="bounty_asc">Bounty ▲</option>
+        </select>
+        <label class="toggle"><input id="onlyUnread" type="checkbox"> Only unread</label>
+        <button id="exportBtn">Export progress</button>
+        <input id="importFile" type="file" accept=".json" style="display:none" />
+        <button id="importBtn">Import progress</button>
+        <button id="updateWriteupsBtn" title="Refetch writeups from pentester.land (if online)">Update writeups</button>
+      </div>
+    </header>
+
+    <section class="settings">
+      <label><input id="darkToggle" type="checkbox" /> Dark mode</label>
+      <label>Weekly goal:
+        <input id="weeklyGoal" type="number" min="0" value="10" style="width:70px" />
+      </label>
+      <label><input id="showOpenBtn" type="checkbox" checked /> Show Open button</label>
+    </section>
+
+    <section class="progress-bars">
+      <div>
+        <div class="progress-label">Overall progress</div>
+        <div class="progress">
+          <div id="overallProgress" class="progress-bar"></div>
+        </div>
+        <div id="overallText" class="progress-text"></div>
+      </div>
+      <div>
+        <div class="progress-label">This week's goal</div>
+        <div class="progress">
+          <div id="weeklyProgress" class="progress-bar weekly"></div>
+        </div>
+        <div id="weeklyText" class="progress-text"></div>
+      </div>
+    </section>
+
+    <main>
+      <div id="paginationTop" class="pagination-container"></div>
+      <ul id="list" class="writeup-list"></ul>
+      <div id="paginationBottom" class="pagination-container"></div>
+    </main>
+
+<section class="heatmap-section" aria-label="Activity heatmap">
+  <div class="heatmap-title">
+    🔥 Activity Heatmap
+    <span class="heatmap-sub"> click a day to see read items</span>
+  </div>
+
+  <div class="heatmap-container">
+    <div class="heatmap-inner">
+      <div class="month-labels" id="heatmapMonthLabels" aria-hidden="true"></div>
+
+      <div class="heatmap-body">
+        <div class="day-labels">
+          <div class="day-label">Mon</div>
+          <div class="day-label"></div>
+          <div class="day-label">Wed</div>
+          <div class="day-label"></div>
+          <div class="day-label">Fri</div>
+          <div class="day-label"></div>
+          <div class="day-label">Sun</div>
+        </div>
+
+        <div class="heatmap-scroll" id="heatmapScroll">
+          <div class="weeks-grid" id="heatmapWeeks" role="grid" aria-label="Heatmap weeks grid"></div>
+        </div>
+      </div>
+
+      <div class="heatmap-legend" id="heatmapLegend">
+        <span class="legend-label">Less</span>
+        <div class="legend-scale" id="heatmapLegendBoxes"></div>
+        <span class="legend-label">More</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- tooltip -->
+  <div id="heatmapTooltip" class="heatmap-tooltip" role="tooltip" style="display:none"></div>
+
+  <!-- modal for day detail -->
+  <div id="heatmapModal" class="modal" aria-hidden="true">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="heatmapModalTitle">
+      <div class="modal-header">
+        <div class="modal-title" id="heatmapModalTitle">Reads on <span id="modalDate"></span></div>
+        <button class="close-btn" id="heatmapModalClose" title="Close">✕</button>
+      </div>
+      <div id="modalBody" style="max-height:60vh; overflow:auto; padding-right:8px;"></div>
+    </div>
+  </div>
+</section>
+
+
+    <footer>
+      <small>Local only • Stores progress in <code>userdata.json</code> • Backend caches <code>writeups.json</code></small>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
