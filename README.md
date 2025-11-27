@@ -1,4 +1,4 @@
-# Writeups Tracker — Local Pentester.Writeups Reader & Progress Tracker
+# 📚 Writeups Tracker — Local Pentester.Writeups Reader & Progress Tracker
 
 A lightweight, local-first web app to browse and track pentest writeups (from `https://pentester.land/writeups.json`) on your Kali Linux machine.
 Runs entirely locally: a tiny Flask backend caches the writeups and stores `userdata.json`, while a static frontend provides filtering, pagination, read/unread tracking, comments, bounty sorting, and a modern GitHub-style heatmap of activity.
@@ -23,41 +23,37 @@ python3 backend.py
 
 ---
 
-# ✅ Current Features (Implemented / Working)
 
-* Local Flask backend that:
+## ✨ Features
 
-  * Caches `writeups.json` locally.
-  * Serves `/api/writeups` (returns a clean array).
-  * Serves `/api/data` for `userdata.json` (GET/POST).
-* Frontend (pure HTML / CSS / JS — no external CDNs) providing:
+### Tracking & Progress
 
-  * Read / Mark unread (shared across all browsers via `userdata.json`).
-  * Export / Import progress (JSON).
-  * Tags filter (populated from `Bugs` in `writeups.json`).
-  * Search (title, author, tags, description, bounty).
-  * Sort by date/title/author/bounty (parse smartly from `Bounty` field).
-  * Pagination (25 items per page) with `1-25 of N` and page controls.
-  * Bounty display inside each item (raw text + parsed numeric used for sorting).
-  * Comment per writeup (saved to `userdata.json`) — currently via prompt() (see roadmap).
-  * Toggle to show/hide the “Open” button.
-  * Progress indicators: overall progress & weekly goal.
-  * Heatmap (GitHub-style) representing reads by day (last 52 weeks) — hover tooltip + click opens modal with day’s read items (title, link, comment).
-  * Keyboard shortcuts: `/` focus search, `r` toggle first visible read, `u` unread-only.
-* Responsive UI (works on desktop / mobile; heatmap horizontally scrollable).
-* Everything stored in project root:
+  * **Read Status:** Easily mark any writeup as **Read** (green border) or **Unread** (red border) with a single click on the list item.
+  * **Personal Notes:** Add private **comments/notes** to any writeup using the "Note" button.
+  * **Overall Progress:** Visualize your total writeup read percentage.
+  * **Weekly Goal:** Set and track a weekly reading goal with a dedicated progress bar.
+  * **Read Heatmap:** A GitHub-style **54-week heatmap** visualizes your daily reading activity. Click on any day to see the list of writeups read on that date.
 
-  ```
-  writeups-tracker/
-  ├─ backend.py
-  ├─ writeups.json         # cached
-  ├─ userdata.json         # progress + settings
-  ├─ run.sh
-  └─ static/
-     ├─ index.html
-     ├─ style.css
-     └─ script.js
-  ```
+### Filtering & Organization
+
+  * **Advanced Filter Sidebar:** Open the "Filters" panel for powerful, multi-select filtering options:
+      * Filter by **Author**.
+      * Filter by **Program** (supports writeups with multiple programs).
+      * Filter by **Tags/Bugs** (e.g., XSS, RCE, SQLi).
+      * Filter by **Bounty** amount range (Min/Max).
+      * Filter by **Date** range (Publication or Added Date).
+  * **Search Bar:** Quick-filter the list by Title, Author, Tags, and Description.
+  * **Sorting:** Sort the list by Date, Title, Author, or Bounty amount (Ascending/Descending).
+  * **Only Unread Toggle:** Quickly hide all items you've already marked as read.
+
+### UX & Data Management
+
+  * **Curvy Modern UI:** A clean, modern aesthetic with curvy buttons and input fields (8px radius) for improved look and feel.
+  * **Dark/Light Mode:** Toggle between dark and light themes.
+  * **Data Portability:** **Export** and **Import** all of your tracking data (`userdata.json`) to easily move your progress between machines or back it up.
+  * **Pagination:** Loads the writeups in pages (25 items per page) to ensure fast rendering, even with thousands of entries.
+  * **Update Mechanism:** Button to trigger a backend refresh of the main `writeups.json` data.
+
 
 ---
 
@@ -92,16 +88,20 @@ python3 backend.py
 
 ---
 
-# Usage & UX notes
 
-* **First run:** backend fetches `https://pentester.land/writeups.json` and stores it as `writeups.json`. If the remote is unavailable, the app serves empty array or existing cache.
-* **Read tracking:** clicking an item toggles read/unread. Timestamps (ISO) are stored in `userdata.json` (so the heatmap and weekly counts are computed from these).
-* **Comments:** saved in `userdata.json` under `comments`. (Currently added via a prompt; planned UX improvements listed below.)
-* **Export/Import:** useful to sync between machines or keep backups.
-* **Pagination:** 25 items per page; page controls are shown top + bottom.
-* **Bounty parsing:** tries to extract numeric amounts (supports `2,500`, `$2.5k`, ranges, etc.). If parsing fails, raw text is shown.
+## 📝 Usage & UX Notes
 
----
+| Action | How to Perform | Note |
+| :--- | :--- | :--- |
+| **Mark Read/Unread** | Click anywhere on the writeup row. | Toggles the read status and updates the progress. |
+| **Search** | Type in the top search bar. | Use the keyboard shortcut `/` to focus the search bar instantly. |
+| **Advanced Filtering** | Click the **Filters** button. | Allows multi-select on Authors, Programs, and Tags, plus range filtering for Bounty and Date. |
+| **Add/Edit Note** | Click the **Note** button next to a writeup. | Opens a modal to save personal comments; notes are displayed under the list item. |
+| **Toggle Unread** | Click the "Only unread" toggle switch. | Use the keyboard shortcut `u` for a quick toggle. |
+| **View Daily Reads** | Click a colored square on the **Heatmap**. | Opens a modal showing the titles of all writeups recorded as read on that specific date. |
+| **Update Data** | Click the **Update** button. | This sends a request to the backend to refresh the core `writeups.json` data, if the backend is configured to do so. |
+
+-----
 
 # 📁 Project structure
 
@@ -151,71 +151,12 @@ writeups-tracker/
 * [✅] Pagination (25 per page) and bounty sorting/display.
 * [✅] Heatmap (GitHub-style) for reads, hover tooltip + click modal.
 
-## Study-focused design (Future work / Checklist)
 
-* [ ] **Complete UI refresh — study-focused design**
-  * Modern dark theme, smooth shadows, better spacing.
-  * Readable monospace where appropriate (for timestamps, bounty, code snippets).
-  * Light mode updated to be modern & minimal.
-* [ ] **All checkboxes → toggles (switches)**
-  Replace form checkboxes with neat toggles (e.g. “Only unread”, “Show Open button”).
-* [ ] **Right Sidebar filters (multi-select)**
-  Sidebar that slides in/out for advanced filters:
+## ✅ Future Checklist
 
-  * Authors (multi-select)
-  * Programs (multi-select)
-  * Bug class (multi-select)
-  * Min / Max bounty (range inputs)
-  * Added date range (from / to)
-  * **Apply** and **Reset** buttons
-  * Sidebar toggled by a prominent **Filter** button
-* [ ] **Pagination & bounty improvements remain** (already implemented)
-
-  * Keep 25/page & `1-25 of N` UI.
-  * Show formatted bounties with currency and commas; fallback raw text for non-numeric.
-* [ ] **Bounty formatting**
-
-  * Show `$` and formatted commas: e.g. `$2,500` (when parsed); otherwise show raw `"-"` or text.
-* [ ] **Heatmap improvements**
-
-  * Show last **54 weeks** (last 52 + next 2 weeks) while keeping it horizontally scrollable.
-  * Month labels across the top with correct automatic placement.
-  * Day labels on left (Mon / Wed / Fri / Sun).
-  * Smooth hover tooltip and click opens modal with that day’s read items (title, link, comment).
-  * Adaptive color scaling per-metric (thresholds scale to data distribution).
-* [ ] **Replace comment prompt with modern modal**
-
-  * A modal with a `textarea`, **Save** / **Cancel**, markdown-lite preview optionally.
-  * Comments stored in `userdata.json` and displayed inline under each writeup.
-* [ ] **Filter sidebar multi-select applied on top of search/tags**
-
-  * Multi-dimensional filtering: search + tags + sidebar filters combine to refine results.
-* [ ] **Responsive, low-distraction “study-focused” layout**
-
-  * Minimal distraction mode, split layout: content center, filter sidebar collapsible on the right.
-  * Larger readable fonts, good line-height, subtle focus states.
-* [ ] **Accessibility polish**
-
-  * Keyboard navigation for the list and heatmap.
-  * ARIA attributes for modal and heatmap.
-* [ ] **Optional: server-side paging API**
-
-  * For very large `writeups.json` files, add server endpoints like `/api/writeups?page=...&perPage=...&filters=...` to let backend return paged results instead of loading all into the browser.
-* [ ] **Optional: theme presets** (Study / Focus / Minimal).
-* [ ] **Optional: Export study report** — export weekly/monthly reading reports (CSV/JSON).
-
----
-
-# How I suggest we tackle the redesign (high level)
-
-1. **Design tokens & theme** — create CSS variables for light/dark palettes, spacing, typography, shadows.
-2. **Sidebar component** — implement a right-side slide-over and wire multi-select controls.
-3. **Form controls** — create accessible toggle switches and range/bounty inputs.
-4. **Modal comments** — replace `prompt()` with an inline modal component and update `script.js` save flows.
-5. **Heatmap tuning** — change weeks to 54 columns and tweak thresholds and month label placement.
-6. **UX polish & QA** — keyboard shortcuts, small animations, mobile breakpoints.
-7. **Optional server paging** — if dataset grows very large.
-
-If you want, I can *generate the code changes for any subset of the above* (for example: theme + toggles + sidebar skeleton; or comment modal + heatmap 54-week support). Tell me which group you want me to implement first and I’ll produce the full code diffs you can drop into your project.
-
+  * [ ] **Stats Page:** Create a dedicated view for statistics, such as "Top 10 most frequently read Programs/Authors."
+  * [ ] **Direct Filter Links:** Allow clicking on a badge (tag or program) within a list item to instantly filter the list by that value.
+  * [ ] **"My Notes" View:** A consolidated page that displays all writeups that have user comments/notes.
+  * [ ] **Local Data Backup:** Implement an automatic daily/weekly backup feature for `userdata.json`.
+  * [ ] **Date Grouping:** Add a feature to group the writeup list by Year or Month.
 ---
