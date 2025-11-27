@@ -7,6 +7,7 @@ Use it to keep a study-focused reading workflow, track progress across browsers 
 
 ---
 
+
 ## Quick TL;DR
 
 ```bash
@@ -135,12 +136,11 @@ writeups-tracker/
   ```bash
   pkill -f backend.py
   ```
-
+* changing default browser opening 
+   change `set -e` line on run.sh  
 ---
 
 # 🔮 Future checklist — study-focused redesign & UX improvements
-
-> Below is a prioritized **future roadmap / checklist** for turning the app into a study-focused, modern UX. Marked items (✅) are already implemented; unchecked items (⬜) are proposed enhancements.
 
 ## Current (OK — works perfectly)
 
@@ -160,3 +160,8 @@ writeups-tracker/
   * [ ] **Local Data Backup:** Implement an automatic daily/weekly backup feature for `userdata.json`.
   * [ ] **Date Grouping:** Add a feature to group the writeup list by Year or Month.
 ---
+
+### Screenshots
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
